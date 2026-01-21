@@ -1,1 +1,128 @@
 /* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'Nunito', sans-serif;
+    box-sizing: border-box;
+}
+
+body{
+    background-color: #f4f6f9;
+}
+
+li {
+    list-style: none;
+}
+
+hr{
+    border-top: 1px solid #eeeeee;
+}
+a{
+    text-decoration: none
+}
+
+.container{
+    margin: 0 auto;
+    padding: 0 25px;
+}
+.container-full-width{
+    max-width: 1800px;
+    min-width: 1200px;
+}
+.d-flex{
+    display: flex;
+}
+.flex-row{
+    flex-flow: row;
+}
+.flex-column{
+    flex-flow: column;
+}
+.justify-center{
+    justify-content: center;
+}
+.justify-start{
+    justify-content: flex-start;
+}
+.justify-between{
+    justify-content: space-between;
+}
+.align-center{
+    align-items: center;
+}
+.h-100{
+    height: 100%;
+}
+.w-100{
+    width: 100%;
+}
+.w-mm{
+    width: 19%;
+}
+.w-xsm{
+    width: 5%;
+}
+.mt-xsm{
+    margin-top: 1em;
+}
+.mt-sm{
+    margin-top: 5em;
+}
+.mt-mm{
+    margin-top: 10em;
+}
+.mt-lm{
+    margin-top: 15em;
+}
+.mb-xsm{
+    margin-bottom: 1em;
+}
+.mb-sm{
+    margin-bottom: 5em;
+}
+.mb-mm{
+    margin-bottom: 10em;
+}
+.mb-lm{
+    margin-bottom: 15em;
+}
+.p-sm{
+    padding: 1.5em;
+}
+.pt-sm{
+    padding-top: 1em;
+}
+.pb-sm{
+    padding-bottom: 1em;
+}
+.px-sm{
+    padding: 0 1.5em;
+}
+.py-sm{
+    padding: 1em 0;
+}
+.coverflow-x-scroll{
+    overflow-x: scroll;
+    &::-webkit-scrollbar {
+        height: 6px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: #535353;
+        border-radius: 4px;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: #eee;
+    }
+}
+.coverflow-x-hidden{
+    overflow-x: hidden;
+}
+
+@media (max-width: 600px){
+    .container{
+        padding: 0 15px;
+    }
+}

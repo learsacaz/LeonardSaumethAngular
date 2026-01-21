@@ -1,0 +1,11 @@
+footer{
+    height: 100px;
+    background-color: #253a6b;
+    color: rgba(255, 255, 255, 0.404);
+    text-align: center;
+}
+@media (max-width: 600px){
+    footer{
+        font-size: 12px;
+    }
+}
