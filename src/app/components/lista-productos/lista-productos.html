@@ -2,38 +2,32 @@
     <div class="container w-100">
         <div class="d-flex justify-between align-center w-100">
             <input class="input-search" type="text" placeholder="Search..." (input)="search($event)"/>
-            <button class="btn-add">Agregar</button>
+            <button class="btn-add" routerLink="/Registrar-productos">Agregar</button>
         </div>
-        <div class="product-list w-100 mt-xsm d-flex flex-column justify-center align-start p-sm">
+        <div class="bg-white w-100 mt-xsm d-flex flex-column justify-center align-start p-sm">
             <div class="w-100 coverflow-x-scroll">
                 <div class="container-full-width d-flex justify-center align-center flex-column w-100">
                     <div class="d-flex w-100 header-product-list border-b">
                         <div class="w-mm d-flex justify-center align-center"><p>Logo</p></div>
-                        <div class="w-mm d-flex justify-start align-center"><p>Nombre del producto</p></div>
-                        <div class="w-mm d-flex justify-start align-center"><p>Descripción</p></div>
-                        <div class="w-mm d-flex justify-start align-center"><p>Fecha de liberación</p></div>
-                        <div class="w-mm d-flex justify-start align-center"><p>Fecha de reestructuración</p></div>
+                        <div class="w-mm d-flex justify-start align-center px-xsm"><p>Nombre del producto</p></div>
+                        <div class="w-mm d-flex justify-start align-center px-xsm"><p>Descripción</p></div>
+                        <div class="w-mm d-flex justify-start align-center px-xsm"><p>Fecha de liberación</p></div>
+                        <div class="w-mm d-flex justify-start align-center px-xsm"><p>Fecha de reestructuración</p></div>
                         <div class="w-xsm d-flex justify-center align-center"></div>
                     </div>
                     @if (productos.length > 0){
                         @for (producto of pagedProducts; track producto.id; let i = $index) {
                             <div class="d-flex w-100 flex-row justify-center align-center py-sm border-b">
-                                <div class="w-mm d-flex justify-center align-center"><img [src]="producto.logo" alt="{{ producto.name }} Logo" (error)="producto.logo = 'icons/'+producto.logo" class="product-logo" /></div>
-                                <div class="w-mm d-flex justify-start align-center"><p>{{ producto.name }}</p></div>
-                                <div class="w-mm d-flex justify-start align-center"><p>{{ producto.description }}</p></div>
-                                <div class="w-mm d-flex justify-start align-center"><p>{{ producto.date_release | dateFormat }}</p></div>
-                                <div class="w-mm d-flex justify-start align-center"><p>{{ producto.date_revision | dateFormat }}</p></div>
+                                <div class="w-mm d-flex justify-center align-center"><img [src]="producto.logo" alt="{{ producto.name }} Logo" (error)="producto.logo = 'icons/assets-1.png'" class="product-logo" /></div>
+                                <div class="w-mm d-flex justify-start align-center px-xsm"><p>{{ producto.name }}</p></div>
+                                <div class="w-mm d-flex justify-start align-center px-xsm"><p>{{ producto.description }}</p></div>
+                                <div class="w-mm d-flex justify-start align-center px-xsm"><p>{{ producto.date_release | dateFormat }}</p></div>
+                                <div class="w-mm d-flex justify-start align-center px-xsm"><p>{{ producto.date_revision | dateFormat }}</p></div>
                                 <!-- <div class="w-xsm d-flex justify-center align-center"><span class="menu d-flex justify-center align-center"><img src="icons/three-dots-vertical.svg" class="menu-icon" alt=""></span></div> -->
                                 <div class="w-xsm d-flex justify-center align-center">
-                                    <details class="dropdown" (toggle)="onToggle(i, $event)">
-                                        <summary>
-                                            <span class="menu d-flex justify-center align-center"><img src="icons/three-dots-vertical.svg" class="menu-icon" alt=""></span>
-                                        </summary>
-                                        <ul>
-                                            <li><button (click)="open(producto)">Editar</button></li>
-                                            <li><button (click)="open(producto)">Eliminar</button></li>
-                                        </ul>
-                                    </details>
+                                    <button  cdkOverlayOrigin #trigger="cdkOverlayOrigin" (click)="toggleDropdown(producto, trigger)" class="dropdown">
+                                        <span class="menu d-flex justify-center align-center"><img src="icons/three-dots-vertical.svg" class="menu-icon" alt=""></span>
+                                    </button>
                                 </div>
                             </div>
                         }
@@ -80,4 +74,19 @@
             <button class="btn-modal eliminar-modal" (click)="confirmDelete()"><b>Confirmar</b></button>
         </div>
     </dialog>
+    <ng-template
+    cdkConnectedOverlay
+    [cdkConnectedOverlayOrigin]="currentTrigger"
+    [cdkConnectedOverlayOpen]="isOpen"
+    [cdkConnectedOverlayHasBackdrop]="true"
+    (backdropClick)="closeDropdown()"
+    >
+        <div class="dropdown-menu">
+            <ul>
+                <button (click)="openEdit()">Editar</button>
+                <hr>
+                <button (click)="openDelete()">Eliminar</button>
+            </ul>
+        </div>
+    </ng-template>
 </section>

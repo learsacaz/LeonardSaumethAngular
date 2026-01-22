@@ -1,13 +1,16 @@
 import { Component, ElementRef, ViewChild, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common'
 import { ProductosService } from '../../services/productos.service';
-import { Router } from '@angular/router';
+import { ProductoStateService } from '../../services/producto-state.service';
+import { Router, RouterLink } from '@angular/router';
 import { Producto } from '../../models/productos.model';
 import { DateFormatPipe } from '../../pipes/date-format-pipe';
+import { OverlayModule } from '@angular/cdk/overlay';
 
 @Component({
   standalone: true,
   selector: 'app-lista-productos',
-  imports: [DateFormatPipe],
+  imports: [DateFormatPipe, RouterLink, OverlayModule, CommonModule],
   templateUrl: './lista-productos.html',
   styleUrl: './lista-productos.css',
 })
@@ -19,14 +22,17 @@ export class ListaProductos implements OnInit {
   pagedProducts: Producto[] = [];
   pageSizeOptions = [5, 10, 20];
   pageSize = 5;
+  isOpen: boolean = false;
   currentPage = 1;
   totalPages = 0;
   openIndex: number | null = null;
   nombreProducto: string = '';
   idProducto: string = '';
   searchText: string = '';
+  currentTrigger: any;
+  productSelected!: Producto;
 
-  constructor(public datosProductos:ProductosService, private router:Router) {}
+  constructor(public datosProductos:ProductosService, private router:Router, private productoState: ProductoStateService) {}
 
   ngOnInit(): void {
     this.datosProductos.getProducts("products").subscribe((data)=>{
@@ -38,7 +44,6 @@ export class ListaProductos implements OnInit {
 
   search(event: Event) {
     const input = event.target as HTMLInputElement;
-    console.log(input.value);
     if(input.value === '') {
      this.ngOnInit();
       return;
@@ -74,25 +79,21 @@ export class ListaProductos implements OnInit {
     this.calculatePagination();
   }
 
-  onToggle(index: number, event: Event) {
-    const current = event.target as HTMLDetailsElement;
-
-    if (!current.open) return;
-
-    const all = document.querySelectorAll<HTMLDetailsElement>('details.dropdown');
-
-    all.forEach((details, i) => {
-      if (i !== index) {
-        details.removeAttribute('open');
-      }
-    });
+  toggleDropdown(producto: Producto, trigger: any) {
+    this.currentTrigger = trigger;
+    this.productSelected = producto;
+    this.isOpen = !this.isOpen;
   }
 
-  open(productName:Producto) {
+  closeDropdown() {
+    this.isOpen = false;
+  }
+
+  openDelete() {
     const dialog = this.dialog.nativeElement;
     dialog.showModal();
-    this.nombreProducto = productName.name;
-    this.idProducto = productName.id;
+    this.nombreProducto = this.productSelected.name;
+    this.idProducto = this.productSelected.id;
     dialog.addEventListener('click', (event) => {
       if (event.target === dialog) {
         dialog.close();
@@ -100,15 +101,21 @@ export class ListaProductos implements OnInit {
     });
   }
 
+  openEdit() {
+    this.productoState.setProducto(this.productSelected);
+    this.router.navigate(['/Actualizar-producto']);
+  }
+
   close() {
     this.dialog.nativeElement.close();
+    this.isOpen = false;
   }
 
   confirmDelete(){
     this.datosProductos.deleteProducts("products/"+this.idProducto).subscribe((data)=>{
-      console.log(data);
       this.ngOnInit()
       this.close();
+      this.isOpen = false;
     });
   }
 

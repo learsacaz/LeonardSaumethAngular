@@ -9,6 +9,7 @@
 
 body{
     background-color: #f4f6f9;
+    height: 100dvh;
 }
 
 li {
@@ -26,6 +27,10 @@ a{
     margin: 0 auto;
     padding: 0 25px;
 }
+.container-xl{
+    margin: 0 auto;
+    padding: 0 20em;
+}
 .container-full-width{
     max-width: 1800px;
     min-width: 1200px;
@@ -35,6 +40,9 @@ a{
 }
 .flex-row{
     flex-flow: row;
+}
+.flex-row-wrap{
+    flex-flow: row wrap;
 }
 .flex-column{
     flex-flow: column;
@@ -51,6 +59,9 @@ a{
 .align-center{
     align-items: center;
 }
+.bg-white{
+    background-color: #ffffff;
+}
 .h-100{
     height: 100%;
 }
@@ -62,6 +73,18 @@ a{
 }
 .w-xsm{
     width: 5%;
+}
+.mx-sm{
+    margin: 0 1.5em;
+}
+.my-xsm{
+    margin: 0.5em 0;
+}
+.my-sm{
+    margin: 1em 0;
+}
+.m-sm{
+    margin: 1.5em;
 }
 .mt-xsm{
     margin-top: 1em;
@@ -96,11 +119,20 @@ a{
 .pb-sm{
     padding-bottom: 1em;
 }
+.px-xsm{
+    padding: 0 0.5em;
+}
 .px-sm{
     padding: 0 1.5em;
 }
 .py-sm{
     padding: 1em 0;
+}
+.p-sm{
+    padding: 1.5em;
+}
+.form-build{
+    flex-flow: row wrap;
 }
 .coverflow-x-scroll{
     overflow-x: scroll;
@@ -121,7 +153,16 @@ a{
     overflow-x: hidden;
 }
 
-@media (max-width: 600px){
+@media (max-width: 1200px){
+    .container-xl{
+        padding: 0 5em;
+    }
+}
+
+@media (max-width: 780px){
+    .mt-sm{
+        margin-top: 2em;
+    }
     .container{
         padding: 0 15px;
     }

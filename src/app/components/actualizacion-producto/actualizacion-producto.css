@@ -1,0 +1,90 @@
+.container-form{
+    min-width: 600px;
+    max-width: 900px;
+}
+.form-group{
+    width: 50%;
+    height: 100px;
+}
+input{
+    height: 45px;
+    border-radius: 5px;
+    border: 1.5px solid #666666;
+    padding: 0 10px;
+    &:disabled{
+        background-color: #f4f4f4;
+    }
+    &.ng-invalid.ng-touched {
+        border: 1.5px solid #e53935;
+        animation: shake 0.2s ease-in-out 2;
+    }
+}
+label{
+    margin-bottom: 10px;
+}
+small{
+    margin-top: 4px;
+    color: red;
+    font-size: 12px;
+}
+button{
+    height: 50px;
+    width: 100px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    color: #253a6b;
+    font-weight: 900;
+}
+.restart{
+    background-color: #eaecf2;
+    &:hover{
+        background-color: #888585;
+    }
+}
+.registrar{
+    background-color: #f5df66;
+    &:disabled{
+        background-color: #fdf1a4;
+        color: #5d75af;
+        cursor: not-allowed;
+    }
+    &:hover:enabled{
+        background-color: #b8a238;
+    }
+}
+.readonly-like{
+    background-color: #f4f4f4;
+    cursor: not-allowed;
+    pointer-events: none;
+    border: 1.5px solid #c0c0c0;
+    color: #747474;
+}
+@keyframes shake {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(-4px); }
+  50% { transform: translateX(4px); }
+  75% { transform: translateX(-4px); }
+}
+@media (max-width: 780px){
+    .container-xl{
+        padding: 0 15px;
+    }
+    label{
+        margin-bottom: 5px;
+    }
+    input{
+        height: 40px;
+    }
+    .container-form{
+        min-width: 350px;
+        max-width: none;
+    }
+    .form-build{
+        flex-flow: column;
+    }
+    .form-group{
+        width: 100%;
+        height: 90px;
+    }
+}
