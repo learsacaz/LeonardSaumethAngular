@@ -13,7 +13,12 @@ export class ProductoStateService {
 
   getProducto(): Producto {
     const data = localStorage.getItem(this.key);
-    return data ? JSON.parse(data) as Producto : {} as Producto;
+    if (!data) return {} as Producto;
+    const decoded = JSON.parse(data); 
+    return { ...decoded, 
+      date_release: new Date(decoded.date_release), 
+      date_revision: new Date(decoded.date_revision) 
+    };
   }
 
   clear() {

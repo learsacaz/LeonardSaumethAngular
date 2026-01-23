@@ -1,58 +1,42 @@
-# LeonardSaumethAngular
+# Prueba Técnica de Leonard Saumeth
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.0.2.
 
-## Development server
+## Pasos para correr el proyecto
 
-To start a local development server, run:
-
+1. Descargar el archivo .zip o clonar el proyecto
+2. Pararse en el proyecto dentro del IDE de preferencia
+3. Abrir la terminal y antes de comenzar debemos instalar las dependencias, para ello corremos el comando
+```bash
+npm i
+```
+4. Una vez instaladas las dependencias, para visualizar el proyecto: correr el comando
 ```bash
 ng serve
 ```
-
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
+5. Por último, para correr las pruebas unitarias, debemos correr el comando
 ```bash
-ng generate component component-name
+npm test -- --clearCache
+```
+y el comando
+```bash
+npm run test:coverage
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+## Información importante
 
+1. Recordar que por defecto el proyecto se visualiza en la url `http://localhost:4200/`
+2. Para que funcione el backend, se debe correr el proyecto con el comando
 ```bash
-ng generate --help
+npm run start:dev
 ```
+## Herramientas utilizadas
 
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+![Html](https://img.shields.io/badge/Html-grey?style=for-the-badge&logo=html5)
+![Css](https://img.shields.io/badge/css-grey?style=for-the-badge&logo=css)
+![Typescript](https://img.shields.io/badge/typescript-grey?style=for-the-badge&logo=typescript)
+![Jest](https://img.shields.io/badge/jest-grey?style=for-the-badge&logo=jest)
+![Angular](https://img.shields.io/badge/angular-grey?style=for-the-badge&logo=angular)
 
 ## Additional Resources
 

@@ -1,63 +1,63 @@
 <section class="d-flex justify-center align-center flex-column mt-sm w-100">
-    <div class="container-xl w-100">
+    <div class="container-xl w-100 d-flex justify-center align-center">
         <div class="bg-white container-form d-flex flex-column justify-center align-center w-100 p-sm">
-            <h1 class="mb-xsm">Formulario de Actualización</h1>
+            <h1 class="mb-xsm text-center">Formulario de Actualización</h1>
             <hr class="w-100">
-            <form [formGroup]="formCreateProduct" (ngSubmit)="actualziarProducto()" class="w-100 d-flex form-build justify-center align-center">
-                <div class="form-group d-flex flex-column justify-start align-start px-sm my-xsm">
+            <form [formGroup]="productForm" (ngSubmit)="actualizarProducto()" class="w-100 d-flex form-build justify-center align-center">
+                <div class="form-group d-flex flex-column justify-start align-start px-sm mt-xxsm">
                     <label for="id">ID</label>
                     <input type="text" id="id" formControlName="id" class="readonly-like" [readonly]="true"  />
-                    @if (formCreateProduct.get('id')?.touched && formCreateProduct.get('id')?.errors?.['required']) {
+                    @if (productForm.get('id')?.touched && productForm.get('id')?.errors?.['required']) {
                         <small>ID no válido</small>
                     }
-                    @if (formCreateProduct.get('id')?.touched && formCreateProduct.get('id')?.errors?.['minlength'] || formCreateProduct.get('id')?.errors?.['maxlength']) {
+                    @if (productForm.get('id')?.touched && productForm.get('id')?.errors?.['minlength'] || productForm.get('id')?.errors?.['maxlength']) {
                         <small>ID min 3 caracteres y max 10 caracteres</small>
                     }
                 </div>
-                <div class="form-group d-flex flex-column justify-start align-start px-sm my-xsm">
+                <div class="form-group d-flex flex-column justify-start align-start px-sm mt-xxsm">
                     <label for="name">Nombre</label>
                     <input type="text" id="name" formControlName="name" />
-                    @if (formCreateProduct.get('name')?.touched && formCreateProduct.get('name')?.errors?.['required']) {
+                    @if (productForm.get('name')?.touched && productForm.get('name')?.errors?.['required']) {
                         <small>Este campo es requerido</small>
                     }
-                    @if (formCreateProduct.get('name')?.touched && formCreateProduct.get('name')?.errors?.['minlength'] || formCreateProduct.get('name')?.errors?.['maxlength']) {
+                    @if (productForm.get('name')?.touched && productForm.get('name')?.errors?.['minlength'] || productForm.get('name')?.errors?.['maxlength']) {
                         <small>Nombre min 5 caracteres y max 100 caracteres</small>
                     }
                 </div>
-                <div class="form-group d-flex flex-column justify-start align-start px-sm my-xsm">
+                <div class="form-group d-flex flex-column justify-start align-start px-sm mt-xxsm">
                     <label for="description">Descripción</label>
                     <input id="description" formControlName="description" />
-                    @if (formCreateProduct.get('description')?.touched && formCreateProduct.get('description')?.errors?.['required']) {
+                    @if (productForm.get('description')?.touched && productForm.get('description')?.errors?.['required']) {
                         <small>Este campo es requerido</small>
                     }
-                    @if (formCreateProduct.get('description')?.touched && formCreateProduct.get('description')?.errors?.['minlength'] || formCreateProduct.get('description')?.errors?.['maxlength']) {
+                    @if (productForm.get('description')?.touched && productForm.get('description')?.errors?.['minlength'] || productForm.get('description')?.errors?.['maxlength']) {
                         <small>Descripción min 10 caracteres y max 200 caracteres</small>
                     }
                 </div>
-                <div class="form-group d-flex flex-column justify-start align-start px-sm my-xsm">
+                <div class="form-group d-flex flex-column justify-start align-start px-sm mt-xxsm">
                     <label for="logo">Logo</label>
                     <input type="text" id="logo" formControlName="logo" />
-                    @if (formCreateProduct.get('logo')?.touched && formCreateProduct.get('logo')?.errors?.['required']) {
+                    @if (productForm.get('logo')?.touched && productForm.get('logo')?.errors?.['required']) {
                         <small>Este campo es requerido</small>
                     }
                 </div>
-                <div class="form-group d-flex flex-column justify-start align-start px-sm my-xsm">
+                <div class="form-group d-flex flex-column justify-start align-start px-sm mt-xxsm">
                     <label for="date_release">Fecha de Liberación</label>
                     <input type="date" id="date_release" formControlName="date_release" [min]="today" />
-                    @if (formCreateProduct.get('date_release')?.touched  && formCreateProduct.get('date_release')?.errors?.['required']) {
+                    @if (productForm.get('date_release')?.touched  && productForm.get('date_release')?.errors?.['required']) {
                         <small>Este campo es requerido</small>
                     }
-                    @if (formCreateProduct.get('date_release')?.touched  && formCreateProduct.get('date_release')?.errors?.['minToday']) {
+                    @if (productForm.get('date_release')?.touched  && productForm.get('date_release')?.errors?.['minToday']) {
                         <small>Fecha inválida</small>
                     }
                 </div>
-                <div class="form-group d-flex flex-column justify-start align-start px-sm my-xsm">
+                <div class="form-group d-flex flex-column justify-start align-start px-sm mt-xxsm">
                     <label for="date_revision">Fecha de Reestructuración</label>
                     <input type="date" id="date_revision" formControlName="date_revision" class="readonly-like" [readonly]="true" />
                 </div>
                 <div class="d-flex w-100 flex-row justify-center align-center mt-xsm">
                     <!-- <button type="button" class="mx-sm restart" (click)="restart()">Reiniciar</button> -->
-                    <button type="submit" class="mx-sm registrar" [disabled]="formCreateProduct.invalid" >Actualizar</button>
+                    <button type="submit" class="mx-sm registrar" [disabled]="productForm.invalid" >Actualizar</button>
                 </div>
             </form>
         </div>

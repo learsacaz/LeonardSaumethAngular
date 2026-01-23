@@ -12,7 +12,7 @@ export class DateFormatPipe implements PipeTransform {
     if (!value) return '';
     
     this.oldDate = new Date(value as string);
-    const day = this.oldDate.getDate().toString().padStart(2, '0');
+    const day = (this.oldDate.getDate() + 1).toString().padStart(2, '0');
     const month = (this.oldDate.getMonth() + 1).toString().padStart(2, '0');
     const year = this.oldDate.getFullYear();
     return `${day}/${month}/${year}`;

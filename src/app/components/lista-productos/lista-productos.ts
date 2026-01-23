@@ -6,6 +6,8 @@ import { Router, RouterLink } from '@angular/router';
 import { Producto } from '../../models/productos.model';
 import { DateFormatPipe } from '../../pipes/date-format-pipe';
 import { OverlayModule } from '@angular/cdk/overlay';
+import { catchError } from 'rxjs/operators';
+import { throwError } from 'rxjs';
 
 @Component({
   standalone: true,
@@ -17,6 +19,7 @@ import { OverlayModule } from '@angular/cdk/overlay';
 export class ListaProductos implements OnInit {
   @ViewChild('dialog') dialog!: ElementRef<HTMLDialogElement>;
   public productos:Producto[]=[];
+  public originalProducts: Producto[] = [];
   public filteredProducts: Producto[] = [];
   public cantidadProductos:number=0;
   pagedProducts: Producto[] = [];
@@ -34,23 +37,45 @@ export class ListaProductos implements OnInit {
 
   constructor(public datosProductos:ProductosService, private router:Router, private productoState: ProductoStateService) {}
 
+
+
   ngOnInit(): void {
-    this.datosProductos.getProducts("products").subscribe((data)=>{
-      this.productos=data.data;
-      this.cantidadProductos=this.productos.length;
-      this.calculatePagination();
-    });
+    this.datosProductos.getProducts("products")
+      .pipe(
+        catchError(error => {
+          return throwError(() => error);
+        })
+      )
+      .subscribe({
+        next: (data) => {
+          try {
+            // Manejo de excepción lógica: datos inesperados
+            if (!data || !data.data) {
+              throw new Error("Formato de datos inválido");
+            }
+
+            this.originalProducts = data.data;
+            this.productos = [...this.originalProducts];
+            this.cantidadProductos = this.productos.length;
+            this.calculatePagination();
+          } catch (error) {
+            throwError(() => error);
+          }
+        }
+      });
   }
+
 
   search(event: Event) {
     const input = event.target as HTMLInputElement;
     if(input.value === '') {
-     this.ngOnInit();
+      this.productos = [...this.originalProducts];
+      this.calculatePagination();
       return;
     }
     this.searchText = input.value.toLowerCase();
 
-    this.filteredProducts = this.productos.filter(product =>
+    this.filteredProducts = this.originalProducts.filter(product =>
       product.name.toLowerCase().includes(this.searchText) ||
       product.description.toLowerCase().includes(this.searchText)
     );
